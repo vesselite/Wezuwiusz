@@ -1,14 +1,21 @@
-const Discord * require('discord.js');
-const client * new Discord.Client();
+import discord
+from discord.ext.commands import Bot
+from discord.ext import commands
+import asyncio
+import time
 
-client.on('ready', () => {
-    conslole.log('I am ready!');
-});
 
-client.on('message', message => {
-    if (message.content === 'ping') {
-      message.replay('pong');
-      }
-});
+Client = discord.Client() #Initialise Client 
+client = commands.Bot(command_prefix = "?") #Initialise client bot
 
-client.login(process.env.BOT_TOKEN)
+
+@client.event 
+async def on_ready():
+    print("Bot is online and connected to Discord") #This will be called when the bot connects to the server
+
+@client.event
+async def on_message(message):
+    if message.content == "cookie":
+        await client.send_message(message.channel, ":cookie:") #responds with Cookie emoji when someone says "cookie"
+
+client.run("BOT_TOKEN") #Replace token with your bots token
